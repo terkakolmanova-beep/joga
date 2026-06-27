@@ -1687,23 +1687,24 @@
         </p>
       </div>
 
-      <form onsubmit="handleSubmit(event)">
+      <form id="prihlaska-form" action="https://formspree.io/f/xgojkbbq" method="POST" onsubmit="handleSubmit(event)">
+        <input type="hidden" name="_subject" value="Nová přihláška – Jógový víkend Spolu v harmonii" />
         <div class="form-grid">
           <div class="form-group">
             <label for="jmeno">Jméno a příjmení *</label>
-            <input type="text" id="jmeno" placeholder="Jana Nováková" required />
+            <input type="text" id="jmeno" name="jmeno" placeholder="Jana Nováková" required />
           </div>
           <div class="form-group">
             <label for="email">E-mail *</label>
-            <input type="email" id="email" placeholder="jana@email.cz" required />
+            <input type="email" id="email" name="email" placeholder="jana@email.cz" required />
           </div>
           <div class="form-group">
             <label for="telefon">Telefon</label>
-            <input type="tel" id="telefon" placeholder="+420 777 000 000" />
+            <input type="tel" id="telefon" name="telefon" placeholder="+420 777 000 000" />
           </div>
           <div class="form-group">
             <label for="pocet">Počet osob *</label>
-            <select id="pocet" required>
+            <select id="pocet" name="pocet_osob" required>
               <option value="">Vyberte…</option>
               <option value="1">1 osoba</option>
               <option value="2">2 osoby (dcera + maminka / kamarádky)</option>
@@ -1711,7 +1712,7 @@
           </div>
           <div class="form-group">
             <label for="role">Vaše role v dvojici</label>
-            <select id="role">
+            <select id="role" name="role">
               <option value="">Vyberte…</option>
               <option value="dcera">Dcera / mladší</option>
               <option value="maminka">Maminka / starší</option>
@@ -1721,7 +1722,7 @@
           </div>
           <div class="form-group">
             <label for="strava">Zájem o stravu</label>
-            <select id="strava">
+            <select id="strava" name="strava">
               <option value="">Vyberte…</option>
               <option value="zadna">Pouze se snídaní v ceně</option>
               <option value="obedy">Obědy</option>
@@ -1731,13 +1732,14 @@
           </div>
           <div class="form-group full">
             <label for="zdravotni">Zdravotní omezení nebo poznámky</label>
-            <textarea id="zdravotni" placeholder="Uveďte jakékoliv zdravotní omezení, alergie, zájem o zapůjčení podložky, zájem o domluvu hromadného odjezdu nebo jiné informace, které mi pomohou se lépe připravit…"></textarea>
+            <textarea id="zdravotni" name="poznamky" placeholder="Uveďte jakékoliv zdravotní omezení, alergie, zájem o zapůjčení podložky, zájem o domluvu hromadného odjezdu nebo jiné informace, které mi pomohou se lépe připravit…"></textarea>
           </div>
         </div>
         <div class="form-submit">
           <button type="submit" class="btn">Odeslat přihlášku</button>
         </div>
         <p class="form-disclaimer">Odesláním formuláře souhlasíte se zpracováním osobních údajů za účelem rezervace pobytu. Vaše údaje nebudou sdíleny s třetími stranami.</p>
+        <p id="form-error" style="display:none;color:#b3413a;text-align:center;margin-top:14px;font-size:.93rem">Omlouváme se, odeslání se nezdařilo. Zkuste to prosím znovu, nebo nám napište přímo na <a href="mailto:alenka.kolmanova@seznam.cz">alenka.kolmanova@seznam.cz</a>.</p>
       </form>
 
       <!-- success msg hidden -->
@@ -1825,10 +1827,33 @@
   recalc();
 
   // ─── FORM ─────────────────────────────────────────────────────────
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    document.querySelector('#prihlaska form').style.display = 'none';
-    document.getElementById('form-success').style.display = 'block';
+    const form = e.target;
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const errorBox = document.getElementById('form-error');
+    const originalLabel = submitBtn.textContent;
+
+    errorBox.style.display = 'none';
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Odesílám…';
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: new FormData(form),
+      });
+
+      if (!response.ok) throw new Error('Odeslání se nezdařilo');
+
+      form.style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    } catch (err) {
+      errorBox.style.display = 'block';
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalLabel;
+    }
   }
 
   // ─── MOBILNÍ NAVIGACE ───────────────────────────────────────────────
