@@ -268,6 +268,71 @@
       display: block;
     }
 
+    .carousel {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .carousel-track {
+      display: flex;
+      height: 100%;
+      transition: transform .5s ease;
+    }
+
+    .carousel-track img {
+      flex: 0 0 100%;
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      object-position: center 30%;
+      display: block;
+    }
+
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,.85);
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.4rem;
+      line-height: 1;
+      color: var(--forest);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s;
+    }
+    .carousel-arrow:hover { background: #fff; }
+    .carousel-prev { left: 14px; }
+    .carousel-next { right: 14px; }
+
+    .carousel-dots {
+      position: absolute;
+      bottom: 16px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+    }
+    .carousel-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.6);
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
+    .carousel-dot.active { background: #fff; }
+
     .feature-list {
       list-style: none;
       margin-top: 24px;
@@ -894,6 +959,7 @@
       .lektorka-grid { grid-template-columns: 1fr; }
 
       .about-visual img { height: 300px; }
+      .carousel, .carousel-track img { height: 300px; }
 
       .lektorka-photo img { height: 280px; }
 
@@ -957,11 +1023,7 @@
           </div>
           <div class="hero-meta-item">
             <svg width="18" height="18" fill="none" stroke="#3D5A45" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-            Pátek – Neděle
-          </div>
-          <div class="hero-meta-item">
-            <svg width="18" height="18" fill="none" stroke="#3D5A45" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            Komorní skupina
+            4.–6. 9. 2026
           </div>
         </div>
         <div style="display:flex;gap:14px;flex-wrap:wrap">
@@ -1008,7 +1070,18 @@
         </ul>
       </div>
       <div class="about-visual">
-        <img src="img/foto-vlak.jpg" alt="Dcera s maminkou na výletě" />
+        <div class="carousel" id="ubytovani-carousel">
+          <div class="carousel-track" id="carousel-track">
+            <img src="img/foto-ubytovani-5.webp" alt="Hlavní budova Oázy Srdce" />
+            <img src="img/foto-ubytovani-3.webp" alt="Pokoj pro hosty" />
+            <img src="img/foto-ubytovani-1.jpg" alt="Krb a odpočinkový kout" />
+            <img src="img/foto-ubytovani-2.webp" alt="Bar a společenská místnost" />
+            <img src="img/foto-ubytovani-4.webp" alt="Jezírko v zahradě" />
+          </div>
+          <button class="carousel-arrow carousel-prev" type="button" aria-label="Předchozí fotka">&#8249;</button>
+          <button class="carousel-arrow carousel-next" type="button" aria-label="Další fotka">&#8250;</button>
+          <div class="carousel-dots" id="carousel-dots"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -1264,6 +1337,7 @@
     <div class="calc-wrap">
       <h3>Kalkulačka ceny</h3>
       <p>Zvolte počet osob a případné obědy či večeře — <strong>snídaně je v ceně</strong>.</p>
+      <p style="margin-top:6px;color:#5a6b5c;font-size:.95rem">V ceně je ubytování, program a snídaně. Obědy a večeře jsou za příplatek a nejsou součástí základní ceny, stejně jako případné vstupy v rámci výletů.</p>
 
       <div class="calc-section">
         <h4>Počet osob</h4>
@@ -1547,9 +1621,9 @@
             <label for="strava">Zájem o stravu</label>
             <select id="strava">
               <option value="">Vyberte…</option>
-              <option value="zadna">Bez stravy</option>
-              <option value="obedy">Pouze obědy</option>
-              <option value="vecere">Pouze večeře</option>
+              <option value="zadna">Pouze se snídaní v ceně</option>
+              <option value="obedy">Obědy</option>
+              <option value="vecere">Večeře</option>
               <option value="vse">Obědy i večeře</option>
             </select>
           </div>
@@ -1649,6 +1723,42 @@
     document.querySelector('#prihlaska form').style.display = 'none';
     document.getElementById('form-success').style.display = 'block';
   }
+
+  // ─── CAROUSEL (UBYTOVÁNÍ) ──────────────────────────────────────────
+  (() => {
+    const carousel = document.getElementById('ubytovani-carousel');
+    const track = document.getElementById('carousel-track');
+    const dotsWrap = document.getElementById('carousel-dots');
+    if (!carousel || !track) return;
+
+    const slides = track.children;
+    let index = 0;
+
+    for (let i = 0; i < slides.length; i++) {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', `Fotka ${i + 1}`);
+      dot.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(dot);
+    }
+
+    function update() {
+      track.style.transform = `translateX(-${index * 100}%)`;
+      [...dotsWrap.children].forEach((d, i) => d.classList.toggle('active', i === index));
+    }
+
+    function goTo(i) {
+      index = (i + slides.length) % slides.length;
+      update();
+    }
+
+    carousel.querySelector('.carousel-prev').addEventListener('click', () => goTo(index - 1));
+    carousel.querySelector('.carousel-next').addEventListener('click', () => goTo(index + 1));
+
+    let auto = setInterval(() => goTo(index + 1), 5000);
+    carousel.addEventListener('mouseenter', () => clearInterval(auto));
+  })();
 </script>
 
 </body>
