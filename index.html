@@ -501,8 +501,6 @@
     .parallel-card p { font-size: 0.9rem; color: #4a5e4d; }
 
     /* ─── LEKCE TYPES ────────────────────────────────────────────── */
-    #lekce { background: var(--cream); }
-
     .lekce-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -744,51 +742,6 @@
       font-size: 0.85rem;
       color: #4a5e4d;
       margin-top: 6px;
-    }
-
-    /* ─── FAQ ────────────────────────────────────────────────────── */
-    #faq { background: #ECF2EB; }
-
-    .faq-list { margin-top: 40px; max-width: 720px; }
-
-    .faq-item {
-      border-bottom: 1px solid var(--sage-light);
-    }
-
-    .faq-q {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-      padding: 22px 0;
-      cursor: pointer;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      color: var(--forest);
-      list-style: none;
-    }
-
-    .faq-q::-webkit-details-marker { display: none; }
-
-    .faq-arrow {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: var(--sage-pale);
-      border: 1px solid var(--sage);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: transform .25s;
-    }
-
-    details[open] .faq-arrow { transform: rotate(180deg); }
-
-    .faq-a {
-      padding: 0 0 20px;
-      color: #4a5e4d;
-      font-size: 0.97rem;
     }
 
     /* ─── PRIHLASKA ──────────────────────────────────────────────── */
@@ -1050,7 +1003,6 @@
         <li><a href="#lektorka">Lektorka</a></li>
         <li><a href="#cenik">Cena</a></li>
         <li><a href="#misto">Místo</a></li>
-        <li><a href="#faq">FAQ</a></li>
         <li class="nav-links-cta"><a href="#prihlaska" class="btn" style="padding:9px 22px;font-size:.88rem">Přihlásit se</a></li>
       </ul>
       <div class="nav-actions">
@@ -1070,7 +1022,7 @@
       <div class="hero-text">
         <div class="hero-badge">Jógový víkend · Železné hory</div>
         <h1>Spolu v harmonii:<br /><em>Jóga pro dcery, maminky&nbsp;&amp;&nbsp;kamarádky</em></h1>
-        <p class="hero-lead">Hluboké nadechnutí, zpomalení a čas věnovaný těm nejbližším — v klidném prostředí Oázy Srdce na Bradlech.</p>
+        <p class="hero-lead">Hluboké nadechnutí, zpomalení a čas věnovaný těm nejbližším — v klidném prostředí Oázy Srdce na Bradle.</p>
         <div class="hero-meta">
           <div class="hero-meta-item">
             <svg width="18" height="18" fill="none" stroke="#3D5A45" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
@@ -1108,23 +1060,22 @@
       <div>
         <div class="section-label">O pobytu</div>
         <h2 class="section-title">Bezpečný prostor pro dvě generace</h2>
-        <p class="section-intro">Spojujeme dynamiku a svěžest moderní jógy s jemností, úctou a péčí, kterou si zaslouží tělo maminek-seniorek. Záměrem je odložit každodenní starosti, digitální šum a strávit společné chvíle v tichu přírody.</p>
         <ul class="feature-list" style="margin-top:28px">
           <li>
             <span class="feature-dot"></span>
-            <span><strong>Dvě větve programu</strong> — klasická jóga pro dcery a jemná terapeutická jóga pro maminky, plus společné rituály.</span>
+            <span><strong>Dvě úrovně jógy</strong> — klasická pro dcery a jemná pro maminky, plus společné rituály.</span>
           </li>
           <li>
             <span class="feature-dot"></span>
-            <span><strong>Příroda &amp; klid</strong> — Oáza Srdce v malebném prostředí Bradla, čerstvý vzduch Železných hor, lesní meditace.</span>
+            <span><strong>Lokalita</strong> — Oáza Srdce, Bradle, Železné hory.</span>
           </li>
           <li>
             <span class="feature-dot"></span>
-            <span><strong>Vítány i kamarádky</strong> — pobyt je otevřen všem ženám, které hledají sesterskou a podporující atmosféru.</span>
+            <span><strong>Vhodné i pro dvojice kamarádek.</strong></span>
           </li>
           <li>
             <span class="feature-dot"></span>
-            <span><strong>Všechny aktivity dobrovolné</strong> — program je návrh, ne povinnost. Respektujeme váš rytmus.</span>
+            <span><strong>Všechny aktivity jsou dobrovolné.</strong></span>
           </li>
         </ul>
       </div>
@@ -1146,64 +1097,12 @@
   </div>
 </section>
 
-<!-- TYPY LEKCÍ -->
-<section id="lekce">
-  <div class="container">
-    <div class="section-label">Typy lekcí</div>
-    <h2 class="section-title">Co vás čeká na podložce</h2>
-    <div class="lekce-grid">
-      <div class="lekce-card">
-        <div class="lekce-icon">🌿</div>
-        <h3>Klasická jóga</h3>
-        <p style="margin-bottom:12px;color:#4a5e4d;font-size:.93rem">Pro dcery &amp; kamarádky</p>
-        <ul>
-          <li>Plynulé Hatha a Yin jóga lekce</li>
-          <li>Uvolnění krční páteře a beder</li>
-          <li>Mírně dynamické i hluboce relaxační</li>
-        </ul>
-      </div>
-      <div class="lekce-card">
-        <div class="lekce-icon">🌸</div>
-        <h3>Jemná jóga</h3>
-        <p style="margin-bottom:12px;color:#4a5e4d;font-size:.93rem">Pro maminky seniorky</p>
-        <ul>
-          <li>Citlivá terapeutická jóga</li>
-          <li>Práce s bločky, dekami a židlemi</li>
-          <li>Stabilita, rovnováha a zdravá záda</li>
-          <li>Jemné rozhýbání velkých kloubů</li>
-        </ul>
-      </div>
-      <div class="lekce-card">
-        <div class="lekce-icon">🌬️</div>
-        <h3>Workshop Pránájámy</h3>
-        <p style="margin-bottom:12px;color:#4a5e4d;font-size:.93rem">Společné pro obě generace</p>
-        <ul>
-          <li>Techniky zklidnění nervové soustavy</li>
-          <li>Vitální kapacita plic</li>
-          <li>Termoregulace a lepší spánek</li>
-        </ul>
-      </div>
-      <div class="lekce-card">
-        <div class="lekce-icon">🌲</div>
-        <h3>Lesní procházky</h3>
-        <p style="margin-bottom:12px;color:#4a5e4d;font-size:.93rem">Shinrin-yoku v Železných horách</p>
-        <ul>
-          <li>Nenáročné výlety přírodou</li>
-          <li>Přizpůsobené tempu maminek</li>
-          <li>Lesní meditace a čerstvý vzduch</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- PROGRAM -->
 <section id="program">
   <div class="container">
     <div class="program-header">
       <div class="section-label">Harmonogram</div>
       <h2 class="section-title">Program víkendu</h2>
-      <p class="section-intro">Tři dny plné pohybu, ticha, přírody a sdílení. Klikněte na záložku pro detail každého dne.</p>
     </div>
 
     <div class="tabs">
@@ -1392,7 +1291,6 @@
     <div style="text-align:center;margin-bottom:48px">
       <div class="section-label">Cena pobytu</div>
       <h2 class="section-title">Kolik zaplatíte?</h2>
-      <p class="section-intro" style="margin-inline:auto">Snídaně je součástí základní ceny. Obědy a večeře jsou volitelné — vyberte si, co vám vyhovuje.</p>
     </div>
 
     <div class="calc-wrap">
@@ -1590,7 +1488,7 @@
       <div class="lekce-card">
         <div class="lekce-icon">🚗</div>
         <h3>Doprava</h3>
-        <p style="color:#4a5e4d;font-size:.93rem">Doprava na pobyt je vlastní. Oázu Srdce na Bradlech nejsnáze najdete autem (parkování přímo u objektu) nebo veřejnou dopravou s přestupem v Hlinsku.</p>
+        <p style="color:#4a5e4d;font-size:.93rem">Doprava na pobyt je vlastní. Oázu Srdce na Bradle nejsnáze najdete autem (parkování přímo u objektu) nebo veřejnou dopravou s přestupem v Hlinsku.</p>
         <p style="color:#4a5e4d;font-size:.93rem;margin-top:10px">Pokud byste měly zájem domluvit se na hromadném odjezdu s ostatními účastnicemi, napište nám to do poznámky v přihlášce — rády vás propojíme.</p>
       </div>
       <div class="lekce-card">
@@ -1603,67 +1501,6 @@
         </ul>
         <p style="color:#4a5e4d;font-size:.93rem;margin-top:10px">Pokud vlastní podložku nemáte, napište nám to do poznámky v přihlášce — rády vám jednu zapůjčíme.</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section id="faq">
-  <div class="container">
-    <div class="section-label">Otázky a odpovědi</div>
-    <h2 class="section-title">Často kladené dotazy</h2>
-    <div class="faq-list">
-
-      <details>
-        <summary class="faq-q">
-          Moje maminka nikdy jógu necvičila a má potíže s koleny. Je pobyt vhodný?
-          <span class="faq-arrow">
-            <svg width="12" height="12" fill="none" stroke="#3D5A45" stroke-width="2.5" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
-          </span>
-        </summary>
-        <p class="faq-a">Ano, stoprocentně. Lekce pro seniorky jsou navrženy tak, aby nezatěžovaly klouby. Většinu pozic lze modifikovat, případně cvičit na židli nebo s plnou oporou jógových pomůcek.</p>
-      </details>
-
-      <details>
-        <summary class="faq-q">
-          Nemám maminku, nebo moje maminka jet nemůže. Mohu vzít kamarádku?
-          <span class="faq-arrow">
-            <svg width="12" height="12" fill="none" stroke="#3D5A45" stroke-width="2.5" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
-          </span>
-        </summary>
-        <p class="faq-a">Určitě. Pobyt je otevřený všem ženám, které hledají klid, harmonii a chtějí prožít víkend v sesterské a přátelské atmosféře.</p>
-      </details>
-
-      <details>
-        <summary class="faq-q">
-          Jak je to s podložkami na cvičení?
-          <span class="faq-arrow">
-            <svg width="12" height="12" fill="none" stroke="#3D5A45" stroke-width="2.5" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
-          </span>
-        </summary>
-        <p class="faq-a">V Oáze Srdce jsou základní jógové pomůcky k dispozici, ale doporučujeme vzít si s sebou vlastní podložku (jogu-matku) a oblíbenou deku na závěrečné relaxace pro maximální pohodlí.</p>
-      </details>
-
-      <details>
-        <summary class="faq-q">
-          Je v ceně i ubytování?
-          <span class="faq-arrow">
-            <svg width="12" height="12" fill="none" stroke="#3D5A45" stroke-width="2.5" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
-          </span>
-        </summary>
-        <p class="faq-a">Ano. Základní balíček 3 600 Kč zahrnuje ubytování na 2 noci v útulných pokojích (1 050 Kč/noc na osobu, tedy 2 100 Kč za pobyt), snídaně, pronájem jógových sálů a kompletní program vedený lektorkou (1 500 Kč). Obědy a večeře jsou volitelné a dokupují se zvlášť.</p>
-      </details>
-
-      <details>
-        <summary class="faq-q">
-          Kde přesně se Oáza Srdce nachází?
-          <span class="faq-arrow">
-            <svg width="12" height="12" fill="none" stroke="#3D5A45" stroke-width="2.5" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
-          </span>
-        </summary>
-        <p class="faq-a">Oáza Srdce se nachází v malebném prostředí Bradla v Železných horách. Více informací na <a href="https://oazasrdce.cz/" target="_blank">oazasrdce.cz</a>.</p>
-      </details>
-
     </div>
   </div>
 </section>
